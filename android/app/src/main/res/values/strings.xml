@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BizHome</string>
+    <string name="title_activity_main">BizHome</string>
+    <string name="package_name">com.bizhome.vrhs</string>
+    <string name="custom_url_scheme">com.bizhome.vrhs</string>
+</resources>
