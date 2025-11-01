@@ -206,7 +206,6 @@ npx cap open android
 **Desarrollador**: Víctor Hernández  
 **Email**: victorhernandezsalcedo4@gmail.com  
 **Teléfono**: +53 59157423  
-**Horario Comercial**: Lunes-Viernes 9:00 AM - 6:00 PM (GMT-5)
 
 ## 📄 Licencia
 
