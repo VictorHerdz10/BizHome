@@ -1,0 +1,52 @@
+{
+  "name": "BizHome",
+  "private": true,
+  "version": "0.1.1",
+  "description": "BizHome es una aplicacion para gestionar tus negocios y gastos del hogar",
+  "repository": "",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "npm run serve",
+    "serve": "http-server ./www/ -o -c 1 -a localhost -p 8080",
+    "build-capacitor-android": "npx cap copy android",
+    "postinstall": "cpy --flat ./node_modules/framework7-icons/fonts/*.* ./www/fonts/ && cpy --flat ./node_modules/material-icons/iconfont/*.* ./www/fonts/ && cpy --flat ./node_modules/framework7/*.js ./www/framework7 && cpy --flat ./node_modules/framework7/*.css ./www/framework7 && cpy --flat ./node_modules/framework7/*.map ./www/framework7"
+  },
+  "browserslist": [
+    "IOS >= 15",
+    "Safari >= 15",
+    "last 5 Chrome versions",
+    "last 5 Firefox versions"
+  ],
+  "dependencies": {
+    "@capacitor-community/sqlite": "^7.0.1",
+    "@capacitor/android": "^7.4.2",
+    "@capacitor/app": "^7.0.1",
+    "@capacitor/browser": "^7.0.1",
+    "@capacitor/camera": "^7.0.1",
+    "@capacitor/core": "^7.4.2",
+    "@capacitor/device": "^7.0.1",
+    "@capacitor/filesystem": "^7.1.3",
+    "@capacitor/keyboard": "^7.0.1",
+    "@capacitor/local-notifications": "^7.0.1",
+    "@capacitor/preferences": "^7.0.1",
+    "@capacitor/splash-screen": "^7.0.1",
+    "@capacitor/status-bar": "^7.0.1",
+    "crypto-js": "^4.2.0",
+    "dom7": "^4.0.6",
+    "framework7": "^8.3.4",
+    "framework7-icons": "^5.0.5",
+    "material-icons": "^1.13.14",
+    "qrcode": "^1.5.4",
+    "skeleton-elements": "^4.0.1",
+    "swiper": "^11.2.10"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^7.4.2",
+    "cordova-res": "^0.15.4",
+    "cpy": "^11.1.0",
+    "cpy-cli": "^5.0.0",
+    "http-server": "^14.1.1",
+    "rimraf": "^6.0.1"
+  }
+}
