@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: content:">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+
+  <meta name="theme-color" content="#0a192f">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>BizHome</title>
+
+  <!-- Framework7 CSS -->
+  <link rel="stylesheet" href="framework7/framework7-bundle.min.css">
+  
+  <!-- Iconos y estilos -->
+  <link rel="stylesheet" href="css/icons.css">
+  <link rel="stylesheet" href="css/animate.min.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/fontawesome-free-6.7.2-web/css/all.css">
+  
+  <!-- Chart.js -->
+  <script type="module" src="js/utils/chart.js"></script>
+  <script src="js/utils/crypto-js.min.js"></script>
+  <script src="js/utils/qrcode.min.js"></script>
+  <script src="js/utils/html5-qrcode.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- Panel lateral -->
+    <div class="panel panel-left panel-cover panel-init">
+      <div class="view">
+        <div class="page">
+          <!-- Encabezado del panel -->
+          <div class="panel-header" style="background: var(--f7-color-primary); padding: 16px;">
+            <div style="color: white; font-size: 1.2rem; font-weight: bold;">BizHome</div>
+          </div>
+          <div class="page-content">
+            <div class="list menu-list">
+              <ul>
+                <li>
+                  <a href="/dashboard/" class="item-link item-content panel-close" id="menu-dashboard">
+                    <div class="item-media"><i class="icon material-icons">dashboard</i></div>
+                    <div class="item-inner">
+                      <div class="item-title">Dashboard</div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="/productos/" class="item-link item-content panel-close" id="menu-productos">
+                    <div class="item-media"><i class="icon material-icons">inventory_2</i></div>
+                    <div class="item-inner">
+                      <div class="item-title">Productos</div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="/categorias/" class="item-link item-content panel-close" id="menu-categorias">
+                    <div class="item-media"><i class="icon material-icons">category</i></div>
+                    <div class="item-inner">
+                      <div class="item-title">Categorías</div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="/ventas/" class="item-link item-content panel-close" id="menu-ventas">
+                    <div class="item-media"><i class="icon material-icons">point_of_sale</i></div>
+                    <div class="item-inner">
+                      <div class="item-title">Ventas</div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="/gastos/" class="item-link item-content panel-close" id="menu-gastos">
+                    <div class="item-media"><i class="icon material-icons">payments</i></div>
+                    <div class="item-inner">
+                      <div class="item-title">Gastos del Hogar</div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="/configuracion/" class="item-link item-content panel-close" id="menu-configuracion">
+                    <div class="item-media"><i class="icon material-icons">settings</i></div>
+                    <div class="item-inner">
+                      <div class="item-title">Configuración</div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="/about/" class="item-link item-content panel-close" id="menu-about">
+                    <div class="item-media"><i class="icon material-icons">info</i></div>
+                    <div class="item-inner">
+                      <div class="item-title">Acerca de</div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vista principal -->
+    <div class="view view-main view-init safe-areas">
+      <div class="page page-main">
+        <div class="navbar safe-areas safe-areas-top">
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link panel-open" data-panel="left">
+                <i class="icon material-icons">menu</i>
+              </a>
+            </div>
+            <div class="title">BizHome</div>
+            <div class="right">
+              <a href="/" class="link">
+                <i class="icon material-icons">home</i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="page-content" style="background-color: #f5f7fa;">
+          <!-- Hero Section -->
+          <div class="block hero-block" style="background: linear-gradient(135deg, var(--f7-color-primary) 0%, #172a45 100%); color: white; padding: 2rem; text-align: center;">
+            <div class="hero-text animate__animated animate__fadeIn">
+              <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Bienvenido a BizHome</h1>
+              <p style="font-size: 1.2rem; opacity: 0.9;">La solución completa para la gestión de tu negocio y hogar</p>
+            </div>
+            <div class="hero-image animate__animated animate__zoomIn">
+              <img src="./assets/images/logo.webp" alt="BizHome Logo" style="max-width: 200px; margin: 2rem auto;">
+            </div>
+            <div class="hero-buttons animate__animated animate__fadeInUp" style="margin-top: 2rem;">
+              <a href="/dashboard/" class="button button-large button-fill" style="background: white; color: var(--f7-color-primary); font-weight: bold;">Comenzar</a>
+            </div>
+          </div>
+          
+          <!-- Features Section -->
+          <div class="block features-block" style="padding: 2rem;">
+            <div class="row">
+              <div class="col-33" style=" margin-bottom: 0.5rem;">
+                <div class="feature-card animate__animated animate__fadeInLeft" style="background: white; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                  <i class="material-icons" style="font-size: 3rem; color: var(--f7-color-primary); margin-bottom: 1rem;">insights</i>
+                  <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #2c3e50;">Dashboard</h3>
+                  <p style="color: #7f8c8d;">Resumen completo de todas tus ventas y métricas clave</p>
+                </div>
+              </div>
+              <div class="col-33" style=" margin-bottom: 0.5rem;">
+                <div class="feature-card animate__animated animate__fadeInUp" style="background: white; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                  <i class="material-icons" style="font-size: 3rem; color: var(--f7-color-primary); margin-bottom: 1rem;">inventory</i>
+                  <h3 style="font-size: 1.2rem; margin-bottom: 0.rem; color: #2c3e50;">Inventario</h3>
+                  <p style="color: #7f8c8d;">Organiza tus productos por categorías y stock</p>
+                </div>
+              </div>
+              <div class="col-33" style=" margin-bottom: 0.5rem;">
+                <div class="feature-card animate__animated animate__fadeInRight" style="background: white; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                  <i class="material-icons" style="font-size: 3rem; color: var(--f7-color-primary); margin-bottom: 1rem;">savings</i>
+                  <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #2c3e50;">Gastos</h3>
+                  <p style="color: #7f8c8d;">Gestiona el 10% de tus ganancias y gastos del hogar</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Framework7 JS -->
+  <script src="framework7/framework7-bundle.min.js"></script>
+  
+  <!-- App Core -->
+  <script src="js/app-core.js" type="module"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // Marcar menú activo basado en la ruta actual
+      const currentRoute = app.views.main.router.currentRoute.path.replace('/', '') || 'dashboard';
+      document.getElementById(`menu-${currentRoute}`)?.classList.add('item-active');
+    });
+  </script>
+</body>
+</html>
