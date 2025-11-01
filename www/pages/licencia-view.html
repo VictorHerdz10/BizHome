@@ -1,0 +1,60 @@
+<!-- license-view.html -->
+<div class="page" data-name="license-view">
+  <div class="navbar safe-areas safe-areas-top">
+    <div class="navbar-inner">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon material-icons">arrow_back</i>
+        </a>
+      </div>
+      <div class="title">Estado de Licencia</div>
+    </div>
+  </div>
+
+  <div class="page-content" style="background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%); min-height: 100vh;">
+    <div style="max-width: 500px; margin: 0 auto; padding: 20px;">
+      <div style="text-align: center; margin-top: 20px;">
+        <div style="background-color: #fff; border-radius: 50%; width: 100px; height: 100px; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          <i class="icon material-icons" style="font-size: 50px; color: #3498db;">vpn_key</i>
+        </div>
+        <h2 style="color: #2c3e50; margin-top: 20px; font-weight: 500;">Licencia Activa</h2>
+      </div>
+      
+      <div class="card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin: 30px 0;">
+        <div class="card-content card-content-padding">
+          <div class="list no-hairlines">
+            <ul>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title" style="color: #7f8c8d; font-weight: 400;">Dispositivo</div>
+                  <div class="item-after" id="license-view-device" style="color: #2c3e50; font-weight: 500;"></div>
+                </div>
+              </li>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title" style="color: #7f8c8d; font-weight: 400;">Fecha de expiración</div>
+                  <div class="item-after" id="license-view-expiration" style="color: #2c3e50; font-weight: 500;"></div>
+                </div>
+              </li>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title" style="color: #7f8c8d; font-weight: 400;">Días restantes</div>
+                  <div class="item-after" id="license-view-days" style="color: #2c3e50; font-weight: 500;"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="block" style="margin-top: 20px;">
+        <button onclick="checkLicenseStatus()" 
+          class="button button-large button-fill color-blue"
+          style="--f7-button-bg-color: #3498db; --f7-button-pressed-bg-color: #2980b9; border-radius: 8px; height: 50px; font-weight: 500;">
+          <i class="icon material-icons" style="vertical-align: middle; margin-right: 8px;">refresh</i>
+          Verificar estado
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
