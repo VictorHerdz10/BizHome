@@ -1,0 +1,331 @@
+<div class="page" data-name="categories">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left">
+        <a href="#" class="link panel-open" data-panel="left">
+          <i class="icon material-icons">menu</i>
+        </a>
+      </div>
+      <div class="title">Categorías</div>
+      <div class="right">
+        <a href="#" class="link" id="info-button">
+          <i class="icon material-icons">info</i>
+        </a>
+        <a href="/" class="link">
+          <i class="icon material-icons">home</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content" style="background-color: #f5f7fa;">
+    <!-- Estados -->
+    <div id="loading-state-category" class="block block-strong text-align-center" style="display: none;">
+      <div class="preloader"></div>
+      <p>Cargando categorías...</p>
+    </div>
+
+    <div id="empty-state-category" class="block block-strong text-align-center" style="display: none;">
+      <i class="icon material-icons" style="font-size: 48px; color: #ccc;">category</i>
+      <p>No hay categorías disponibles</p>
+      <a href="#" class="button button-fill button-round " id="add-category-btn"
+        style="background-color: #00bcd4; color: white;">
+        <i class="icon material-icons">add</i> Agregar categoría
+      </a>
+    </div>
+
+    <!-- Lista de categorías -->
+    <div class="block"
+      style="margin: 16px; padding: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <div class="list media-list" style="margin: 0; max-height: calc(100vh - 200px); overflow-y: auto;">
+        <ul id="categories-list" style="background-color: white;"></ul>
+      </div>
+    </div>
+
+    <!-- Botón flotante para agregar -->
+    <div class="fab fab-right-bottom">
+      <a href="#" class="button button-fill button-round " id="add-category-fab"
+        style="background-color: #00bcd4; color: white;">
+        <i class="icon material-icons">add</i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Popup para formulario de categoría -->
+  <div class="popup category-popup">
+    <div class="view">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link popup-close">
+                <i class="icon material-icons">close</i>
+              </a>
+            </div>
+            <div class="title" id="popup-title-category">Nueva Categoría</div>
+          </div>
+        </div>
+        <div class="page-content">
+          <div class="list">
+            <ul>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Nombre</div>
+                  <div class="item-input-wrap">
+                    <input type="text" id="category-name" placeholder="Nombre de la categoría">
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Descripción</div>
+                  <div class="item-input-wrap">
+                    <input type="text" id="category-description" placeholder="Descripción">
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Ícono</div>
+                  <div class="item-input-wrap">
+                    <select id="category-icon" class="icon-selector">
+                      <!-- Las opciones se llenarán dinámicamente -->
+                    </select>
+                  </div>
+                </div>
+              </li>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">Vista previa del ícono</div>
+                  <div class="item-after">
+                    <i class="icon fas" id="icon-preview" style="font-size: 24px;"></i>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Sección de productos asociados (solo en edición) -->
+          <div class="block"
+            style="margin: 16px; padding: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div class="block-header" id="products-header"
+              style="display: none; padding: 8px 16px; background-color: white; font-weight: 500; border-bottom: 1px solid #f0f0f0;">
+              Productos asociados
+            </div>
+            <div class="list media-list" id="products-list-by-category"
+              style="display: none; margin: 0; max-height: 200px; overflow-y: auto;">
+              <ul id="associated-products" style="background-color: white;"></ul>
+              <div class="item-divider" id="no-products-message"
+                style="display: none; text-align: center; padding: 16px; color: #999;">
+                Esta categoría no tiene productos asociados
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <input type="hidden" id="category-id">
+            <button type="button" class="button button-fill button-round color-blue" id="save-category-btn">
+              Guardar
+            </button>
+            <div id="delete-btn-container-category" style="display: none; margin-top: 10px;">
+              <button type="button" class="button button-fill button-round color-red" id="delete-category-btn">
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup info-popup popup-swipe-to-close">
+    <div class="view">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link popup-close" style="color: white;">
+                <i class="icon material-icons">close</i>
+              </a>
+            </div>
+            <div class="title" style="color: white;">Guía de Categorías</div>
+          </div>
+        </div>
+        <div class="page-content">
+          <!-- Tarjeta con efecto flotante -->
+          <div class="card info-card animate__animated animate__fadeInUp"
+            style="margin: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,188,212,0.2);">
+            <div class="card-header"
+              style="background-color: #00bcd4; color: white; font-weight: 500; padding: 12px 16px;">
+              <div style="display: flex; align-items: center; gap: 8px; line-height: 1;">
+                <i class="icon material-icons"
+                  style="font-size: 20px; display: inline-flex; align-items: center; justify-content: center;">help_outline</i>
+                <span style="display: inline-flex; align-items: center;">¿Qué son las categorías?</span>
+              </div>
+            </div>
+            <div class="card-content card-content-padding" style="padding: 16px;">
+              <p style="margin: 0; color: #555; line-height: 1.5;">Las categorías te permiten organizar tus productos en
+                grupos lógicos para facilitar su gestión y búsqueda.</p>
+            </div>
+          </div>
+
+          <!-- Sección de instrucciones con lista animada -->
+          <div class="block animate__animated animate__fadeInUp animate__delay-1s" style="margin-top: 24px;">
+            <h3
+              style="color: #00bcd4; margin: 0 0 12px 16px; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+              <i class="icon material-icons">touch_app</i>
+              <span>¿Cómo usar esta página?</span>
+            </h3>
+            <div class="list accordion-list" style="margin: 0; border-radius: 12px; overflow: hidden;">
+              <ul>
+                <li class="accordion-item animate__animated animate__fadeIn" style="animation-delay: 0.1s;">
+                  <a href="#" class="item-link item-content" style="padding-left: 16px;">
+                    <div class="item-inner">
+                      <div class="item-title" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="icon material-icons" style="color: #00bcd4;">add_circle</i>
+                        <span>Agregar categoría</span>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="accordion-item-content">
+                    <div class="block" style="padding: 12px 16px 12px 56px; background-color: #f5f5f5;">
+                      Presiona el botón <span style="color: #00bcd4; font-weight: 500;">"+"</span> en la esquina
+                      inferior derecha.
+                    </div>
+                  </div>
+                </li>
+                <li class="accordion-item animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+                  <a href="#" class="item-link item-content" style="padding-left: 16px;">
+                    <div class="item-inner">
+                      <div class="item-title" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="icon material-icons" style="color: #00bcd4;">edit</i>
+                        <span>Editar categoría</span>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="accordion-item-content">
+                    <div class="block" style="padding: 12px 16px 12px 56px; background-color: #f5f5f5;">
+                      Haz clic en una categoría y luego en <span
+                        style="color: #00bcd4; font-weight: 500;">"Editar"</span>.
+                    </div>
+                  </div>
+                </li>
+                <li class="accordion-item animate__animated animate__fadeIn" style="animation-delay: 0.3s;">
+                  <a href="#" class="item-link item-content" style="padding-left: 16px;">
+                    <div class="item-inner">
+                      <div class="item-title" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="icon material-icons" style="color: #00bcd4;">delete</i>
+                        <span>Eliminar categoría</span>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="accordion-item-content">
+                    <div class="block" style="padding: 12px 16px 12px 56px; background-color: #f5f5f5;">
+                      Solo disponible cuando editas una categoría <span
+                        style="color: #ff5252; font-weight: 500;">(cuidado: no eliminar categorías con
+                        productos)</span>.
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Ejemplo con efecto de tarjeta -->
+          <div class="block animate__animated animate__fadeInUp animate__delay-2s" style="margin-top: 24px;">
+            <h3
+              style="color: #00bcd4; margin: 0 0 12px 16px; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+              <i class="icon material-icons">star</i>
+              <span>Ejemplo de categoría</span>
+            </h3>
+            <div class="card example-card animate__animated animate__pulse animate__delay-3s"
+              style="margin: 0 16px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,188,212,0.2); transition: transform 0.3s;">
+              <div class="card-content card-content-padding" style="padding: 16px;">
+                <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                  <i class="fas fa-microchip" style="font-size: 24px; color: #00bcd4; margin-right: 12px;"></i>
+                  <div>
+                    <p style="font-weight: 500; margin: 0; color: #333;">Electrónicos</p>
+                    <p style="font-size: 13px; margin: 4px 0 0; color: #666;">5 productos</p>
+                  </div>
+                </div>
+                <p
+                  style="margin: 12px 0 0; color: #555; font-size: 14px; display: flex; align-items: flex-start; gap: 8px;">
+                  <i class="icon material-icons" style="font-size: 16px; color: #00bcd4;">info</i>
+                  <span>Productos electrónicos y dispositivos</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Consejos con iconos - Versión mejorada -->
+          <div class="block animate__animated animate__fadeInUp animate__delay-4s"
+            style="margin-top: 24px; margin-bottom: 24px;">
+            <h3
+              style="color: #00bcd4; margin: 0 0 12px 16px; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+              <i class="icon material-icons">lightbulb_outline</i>
+              <span>Consejos útiles</span>
+            </h3>
+            <div class="list" style="margin: 0; border-radius: 12px; overflow: hidden;">
+              <ul>
+                <!-- Consejo 1 - Nombres descriptivos -->
+                <li class="item-content tip-item animate__animated animate__fadeIn"
+                  style="padding: 16px; animation-delay: 0.1s; border-bottom: 1px solid #f0f0f0;">
+                  <div class="item-inner" style="display: flex; align-items: flex-start;">
+                    <i class="icon material-icons"
+                      style="color: #4caf50; margin-right: 12px; flex-shrink: 0;">check_circle</i>
+                    <div>
+                      <div style="font-weight: 500; margin-bottom: 4px; color: #333;">Usa nombres descriptivos pero
+                        cortos</div>
+                      <div style="font-size: 13px; color: #666; line-height: 1.5;">
+                        Ejemplo: En lugar de "Producto 1", usa "Arroz Integral 1kg". Combina marca + producto +
+                        presentación (max. 50 caracteres).
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Consejo 2 - Íconos representativos -->
+                <li class="item-content tip-item animate__animated animate__fadeIn"
+                  style="padding: 16px; animation-delay: 0.2s; border-bottom: 1px solid #f0f0f0;">
+                  <div class="item-inner" style="display: flex; align-items: flex-start;">
+                    <i class="icon material-icons"
+                      style="color: #4caf50; margin-right: 12px; flex-shrink: 0;">check_circle</i>
+                    <div>
+                      <div style="font-weight: 500; margin-bottom: 4px; color: #333;">Asigna íconos que representen bien
+                        la categoría</div>
+                      <div style="font-size: 13px; color: #666; line-height: 1.5;">
+                        Usa iconos intuitivos: <i class="icon material-icons"
+                          style="font-size: 13px; color: #00bcd4;">local_dining</i> para alimentos,
+                        <i class="icon material-icons" style="font-size: 13px; color: #00bcd4;">cleaning_services</i>
+                        para limpieza,
+                        <i class="icon material-icons" style="font-size: 13px; color: #00bcd4;">electrical_services</i>
+                        para electrónicos.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Consejo 3 - No eliminar categorías -->
+                <li class="item-content tip-item animate__animated animate__fadeIn"
+                  style="padding: 16px; animation-delay: 0.3s;">
+                  <div class="item-inner" style="display: flex; align-items: flex-start;">
+                    <i class="icon material-icons"
+                      style="color: #ff5252; margin-right: 12px; flex-shrink: 0;">warning</i>
+                    <div>
+                      <div style="font-weight: 500; margin-bottom: 4px; color: #333;">No elimines categorías con
+                        productos asociados</div>
+                      <div style="font-size: 13px; color: #666; line-height: 1.5;">
+                        Si necesitas reorganizar, primero mueve los productos a otra categoría o usa la opción
+                        "Archivar" para mantener tu historial de ventas intacto.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
