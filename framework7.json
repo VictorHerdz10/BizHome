@@ -1,0 +1,24 @@
+{
+  "cwd": "C:\\Users\\DELL\\Desktop\\app-framework7",
+  "type": [
+    "capacitor"
+  ],
+  "name": "BizHome",
+  "framework": "core",
+  "template": "single-view",
+  "bundler": false,
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": false,
+    "color": "#007aff",
+    "darkMode": false,
+    "iconFonts": true
+  },
+  "customBuild": false,
+  "pkg": "com.bizhome.vrhs",
+  "capacitor": {
+    "platforms": [
+      "android"
+    ]
+  }
+}
