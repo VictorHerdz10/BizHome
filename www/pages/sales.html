@@ -1,0 +1,402 @@
+<!-- sales.html -->
+<div class="page" data-name="sales">
+  <div class="navbar safe-areas safe-areas-top">
+    <div class="navbar-inner">
+      <div class="left">
+        <a href="#" class="link panel-open" data-panel="left">
+          <i class="icon material-icons">menu</i>
+        </a>
+      </div>
+      <div class="title">Ventas</div>
+      <div class="right">
+        <!-- Agrega este botón de información -->
+        <a href="#" class="link" id="info-button-sales">
+          <i class="icon material-icons">info</i>
+        </a>
+        <a href="/" class="link">
+          <i class="icon material-icons">home</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content" style="background-color: #f5f7fa; overflow: hidden;">
+    <!-- Resumen de ventas -->
+    <div class="card" style="background: white; border-radius: 12px; margin: 16px;">
+      <div class="card-content card-content-padding">
+        <div class="row" style="text-align: center;">
+          <div class="col-33">
+            <div style="color: #00bcd4; font-size: 12px;">VENTAS HOY</div>
+            <div style="font-size: 18px; font-weight: bold; color: #2ecc71;" id="today-sales-amount">$0.00</div>
+            <div style="font-size: 12px; color: #27ae60;">Ganancia: <span id="today-sales-profit">$0.00</span></div>
+          </div>
+          <div class="col-33">
+            <div style="color: #00bcd4; font-size: 12px;">VENTAS SEMANA</div>
+            <div style="font-size: 18px; font-weight: bold; color: #3498db;" id="week-sales-amount">$0.00</div>
+            <div style="font-size: 12px; color: #2980b9;">Ganancia: <span id="week-sales-profit">$0.00</span></div>
+          </div>
+          <div class="col-33">
+            <div style="color: #00bcd4; font-size: 12px;">VENTAS MES</div>
+            <div style="font-size: 18px; font-weight: bold; color: #9b59b6;" id="month-sales-amount">$0.00</div>
+            <div style="font-size: 12px; color: #8e44ad;">Ganancia: <span id="month-sales-profit">$0.00</span></div>
+          </div>
+        </div>
+        <div style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed #eee; text-align: center;">
+          <div style="color: #00bcd4; font-size: 12px;">RETENCIONES ACUMULADAS</div>
+          <div style="font-size: 16px; font-weight: bold; color: #e74c3c;" id="total-retentions">$0.00</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="segmented" style="margin: 0 16px 16px;">
+      <button class="button button-outline segmented-active" id="filter-today-sales">Hoy</button>
+      <button class="button button-outline" id="filter-week-sales">Semana</button>
+      <button class="button button-outline" id="filter-month-sales">Mes</button>
+    </div>
+
+    <div class="filter-feedback" style="margin: 0 16px 8px; text-align: center;">
+      <small id="filter-feedback-text-sales" style="color: #00bcd4; font-weight: bold;">
+        Mostrando ventas de hoy
+      </small>
+    </div>
+
+    <!-- Inputs ocultos para filtros -->
+    <input type="text" id="date-filter-input-sales" style="display: none;">
+    <input type="text" id="week-filter-input-sales" style="display: none;">
+    <input type="text" id="month-filter-input-sales" style="display: none;">
+
+    <!-- Estados -->
+    <div id="loading-state-sale" class="block block-strong text-align-center" style="display: none;">
+      <div class="preloader"></div>
+      <p>Cargando ventas...</p>
+    </div>
+
+    <div id="empty-state-sale" class="block block-strong text-align-center" style="display: none;">
+      <!-- Se llenará dinámicamente -->
+    </div>
+
+    <!-- Lista de ventas con scroll propio -->
+    <div class="block" id="sales-list-container" style="margin: 0 16px; display: none;">
+      <div class="card" style="margin: 0; border-radius: 12px; overflow: hidden;">
+        <div class="card-content" style="padding: 0;">
+          <div class="list media-list" style="margin: 0; max-height: 45vh; overflow-y: auto;">
+            <ul id="sales-list" style="padding: 8px;"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón flotante para agregar -->
+    <div class="fab fab-right-bottom">
+      <a href="#" class="button button-fill button-round" id="add-sale-fab" style="background-color: #00bcd4;">
+        <i class="icon material-icons" style="color: white;">add</i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Popup para nueva/editar venta -->
+  <div class="popup sale-popup">
+    <div class="view">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link popup-close">
+                <i class="icon material-icons">close</i>
+              </a>
+            </div>
+            <div class="title" id="popup-title-sale">Nueva Venta</div>
+          </div>
+        </div>
+        <div class="page-content">
+          <div class="list">
+            <ul>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Producto</div>
+                  <div class="item-input-wrap">
+                    <select id="sale-product">
+                      <!-- Las opciones se llenarán dinámicamente -->
+                    </select>
+                  </div>
+                </div>
+              </li>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    <small id="sale-stock" style="color: #777;">Stock disponible: 0</small>
+                    <br>
+                    <small id="sale-unit-price" style="color: #777;">Precio unitario: $0.00</small>
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Cantidad</div>
+                  <div class="item-input-wrap">
+                    <input type="number" id="sale-quantity" placeholder="0" min="0" step="0.01">
+                  </div>
+                </div>
+              </li>
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    <span style="font-weight: bold; font-size: 16px;">Total:</span>
+                    <span id="sale-total"
+                      style="color: #2ecc71; font-weight: bold; font-size: 16px; float: right;">$0.00</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <input type="hidden" id="sale-id">
+            <button type="button" class="button button-fill button-round color-blue" id="save-sale-btn">
+              Guardar
+            </button>
+            <div id="delete-btn-container-sales" style="display: none; margin-top: 10px;">
+              <button type="button" class="button button-fill button-round color-red" id="delete-sale-btn">
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup de información sobre ventas -->
+  <div class="popup info-popup-sales popup-swipe-to-close">
+    <div class="view">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link popup-close">
+                <i class="icon material-icons">close</i>
+              </a>
+            </div>
+            <div class="title">Guía de Ventas</div>
+          </div>
+        </div>
+        <div class="page-content">
+          <!-- Introducción -->
+          <div class="card info-card animate__animated animate__fadeInUp"
+            style="margin: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,188,212,0.2);">
+            <div class="card-header"
+              style="background-color: #00bcd4; color: white; font-weight: 500; padding: 12px 16px;">
+              <div style="display: flex; align-items: center; gap: 8px; line-height: 1;">
+                <i class="icon material-icons"
+                  style="font-size: 20px; display: inline-flex; align-items: center; justify-content: center;">help_outline</i>
+                <span style="display: inline-flex; align-items: center;">¿Cómo gestionar ventas?</span>
+              </div>
+            </div>
+            <div class="card-content card-content-padding" style="padding: 16px;">
+              <p style="margin: 0; color: #555; line-height: 1.5;">
+                El módulo de ventas te permite registrar todas las transacciones de venta de productos,
+                calcular automáticamente ganancias y mantener un control preciso de tu inventario.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sección de consejos -->
+          <div class="block animate__animated animate__fadeInUp animate__delay-1s" style="margin-top: 24px;">
+            <h3
+              style="color: #00bcd4; margin: 0 0 12px 16px; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+              <i class="icon material-icons">lightbulb_outline</i>
+              <span>Consejos para Registrar Ventas</span>
+            </h3>
+            <div class="list accordion-list" style="margin: 0; border-radius: 12px; overflow: hidden;">
+              <ul>
+                <li class="accordion-item animate__animated animate__fadeIn" style="animation-delay: 0.1s;">
+                  <a href="#" class="item-link item-content" style="padding-left: 16px;">
+                    <div class="item-inner">
+                      <div class="item-title" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="icon material-icons" style="color: #00bcd4;">inventory</i>
+                        <span>Control de stock</span>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="accordion-item-content">
+                    <div class="block" style="padding: 12px 16px 12px 56px; background-color: #f5f5f5;">
+                      <p style="margin: 0 0 8px 0;">El sistema actualiza automáticamente el stock al registrar una
+                        venta.</p>
+                      <p style="margin: 0; color: #ff5252; font-weight: 500;">No podrás vender más unidades de las
+                        disponibles en stock.</p>
+                      <p style="margin: 8px 0 0 0; color: #4caf50; font-weight: 500;">Si editas o eliminas una venta, el
+                        stock se ajustará automáticamente.</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="accordion-item animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+                  <a href="#" class="item-link item-content" style="padding-left: 16px;">
+                    <div class="item-inner">
+                      <div class="item-title" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="icon material-icons" style="color: #00bcd4;">attach_money</i>
+                        <span>Cálculo de ganancias</span>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="accordion-item-content">
+                    <div class="block" style="padding: 12px 16px 12px 56px; background-color: #f5f5f5;">
+                      <p style="margin: 0 0 8px 0;">La ganancia se calcula como: (Precio Venta - Precio Compra) ×
+                        Cantidad.</p>
+                      <p style="margin: 0; color: #4caf50; font-weight: 500;">Puedes ver las ganancias acumuladas por
+                        día, semana y mes en el resumen.</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="accordion-item animate__animated animate__fadeIn" style="animation-delay: 0.3s;">
+                  <a href="#" class="item-link item-content" style="padding-left: 16px;">
+                    <div class="item-inner">
+                      <div class="item-title" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="icon material-icons" style="color: #00bcd4;">event</i>
+                        <span>Fechas de venta</span>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="accordion-item-content">
+                    <div class="block" style="padding: 12px 16px 12px 56px; background-color: #f5f5f5;">
+                      <p style="margin: 0 0 8px 0;">Las nuevas ventas se registran con la fecha actual por defecto.</p>
+                      <p style="margin: 0; color: #ff5252; font-weight: 500;">No puedes registrar ventas con fechas
+                        futuras.</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="accordion-item animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
+                  <a href="#" class="item-link item-content" style="padding-left: 16px;">
+                    <div class="item-inner">
+                      <div class="item-title" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="icon material-icons" style="color: #00bcd4;">filter_alt</i>
+                        <span>Filtros de búsqueda</span>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="accordion-item-content">
+                    <div class="block" style="padding: 12px 16px 12px 56px; background-color: #f5f5f5;">
+                      <p style="margin: 0 0 8px 0;">Puedes filtrar ventas por:</p>
+                      <ul style="margin: 8px 0 0 16px; padding: 0; list-style-type: disc;">
+                        <li>Hoy</li>
+                        <li>Semana actual o semanas anteriores</li>
+                        <li>Mes actual o meses anteriores</li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sección de análisis -->
+          <div class="block animate__animated animate__fadeInUp animate__delay-2s" style="margin-top: 24px;">
+            <h3
+              style="color: #00bcd4; margin: 0 0 12px 16px; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+              <i class="icon material-icons">analytics</i>
+              <span>Analiza tus Ventas</span>
+            </h3>
+            <div class="list" style="margin: 0; border-radius: 12px; overflow: hidden;">
+              <ul>
+                <li class="item-content tip-item animate__animated animate__fadeIn"
+                  style="padding: 16px; animation-delay: 0.1s;">
+                  <div class="item-inner" style="display: flex; align-items: flex-start;">
+                    <i class="icon material-icons"
+                      style="color: #4caf50; margin-right: 12px; flex-shrink: 0;">check_circle</i>
+                    <div class="item-title"
+                      style="font-size: 14px; line-height: 1.5; white-space: normal; word-wrap: break-word;">
+                      Revisa semanalmente qué productos tienen mayor rotación para optimizar tu inventario.
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content tip-item animate__animated animate__fadeIn"
+                  style="padding: 16px; animation-delay: 0.2s;">
+                  <div class="item-inner" style="display: flex; align-items: flex-start;">
+                    <i class="icon material-icons"
+                      style="color: #4caf50; margin-right: 12px; flex-shrink: 0;">check_circle</i>
+                    <div class="item-title" style="font-size: 14px; line-height: 1.5; white-space: normal;">
+                      Compara las ganancias mes a mes para evaluar el crecimiento de tu negocio.
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content tip-item animate__animated animate__fadeIn"
+                  style="padding: 16px; animation-delay: 0.3s;">
+                  <div class="item-inner" style="display: flex; align-items: flex-start;">
+                    <i class="icon material-icons"
+                      style="color: #f39c12; margin-right: 12px; flex-shrink: 0;">warning</i>
+                    <div class="item-title" style="font-size: 14px; line-height: 1.5; white-space: normal;">
+                      Los productos con bajo margen de ganancia pueden afectar tu rentabilidad.
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content tip-item animate__animated animate__fadeIn"
+                  style="padding: 16px; animation-delay: 0.4s;">
+                  <div class="item-inner" style="display: flex; align-items: flex-start;">
+                    <i class="icon material-icons"
+                      style="color: #4caf50; margin-right: 12px; flex-shrink: 0;">check_circle</i>
+                    <div class="item-title" style="font-size: 14px; line-height: 1.5; white-space: normal;">
+                      Usa los filtros por día, semana o mes para analizar períodos específicos.
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Ejemplo de venta bien registrada -->
+          <div class="block animate__animated animate__fadeInUp animate__delay-3s" style="margin-top: 24px;">
+            <h3
+              style="color: #00bcd4; margin: 0 0 12px 16px; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+              <i class="icon material-icons">star</i>
+              <span>Ejemplo Completo</span>
+            </h3>
+            <div class="card example-card animate__animated animate__pulse animate__delay-4s"
+              style="margin: 0 16px 24px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,188,212,0.2);">
+              <div class="card-content card-content-padding" style="padding: 16px;">
+                <div style="display: flex; margin-bottom: 12px; align-items: center;">
+                  <div
+                    style="width: 60px; height: 60px; border-radius: 12px; background-color: #2ecc7120; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                    <i class="material-icons" style="font-size: 28px; color: #2ecc71;">shopping_cart</i>
+                  </div>
+                  <div>
+                    <p style="font-weight: 500; margin: 0 0 4px 0; color: #333;">Arroz Integral 1kg</p>
+                    <p style="font-size: 16px; margin: 0; color: #2ecc71; font-weight: bold;">$25.50</p>
+                  </div>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                  <span
+                    style="background: #2ecc7120; color: #2ecc71; padding: 4px 8px; border-radius: 12px; font-size: 12px;">
+                    <i class="icon material-icons"
+                      style="font-size: 12px; margin-right: 4px; vertical-align: middle;">exposure</i>
+                    5 unidades
+                  </span>
+                  <span
+                    style="background: #3498db20; color: #3498db; padding: 4px 8px; border-radius: 12px; font-size: 12px;">
+                    <i class="icon material-icons"
+                      style="font-size: 12px; margin-right: 4px; vertical-align: middle;">event</i>
+                    15/08/2025
+                  </span>
+                  <span
+                    style="background: #27ae6020; color: #27ae60; padding: 4px 8px; border-radius: 12px; font-size: 12px;">
+                    <i class="icon material-icons"
+                      style="font-size: 12px; margin-right: 4px; vertical-align: middle;">trending_up</i>
+                    Ganancia: $12.75
+                  </span>
+                </div>
+
+                <div style="margin-top: 12px; border-top: 1px dashed #eee; padding-top: 8px;">
+                  <p style="font-size: 14px; color: #555; margin: 8px 0 0 0;">
+                    <i class="icon material-icons"
+                      style="font-size: 14px; margin-right: 4px; vertical-align: middle;">info</i>
+                    Precio compra: $2.55/unidad | Precio venta: $5.10/unidad
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
