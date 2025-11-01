@@ -1,0 +1,192 @@
+<div class="page" data-name="config">
+  <div class="navbar safe-areas safe-areas-top">
+    <div class="navbar-inner">
+      <div class="left">
+        <a href="#" class="link panel-open" data-panel="left">
+          <i class="icon material-icons">menu</i>
+        </a>
+      </div>
+      <div class="title">Configuración</div>
+      <div class="right">
+        <a href="/" class="link">
+          <i class="icon material-icons">home</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content" style="background-color: #f5f7fa;">
+
+    <div class="list" style="margin: 0;">
+      <ul>
+        <!-- Sección de retención de ganancias -->
+        <li>
+          <div class="item-content" style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Retener ganancias</div>
+              <div class="item-after">
+                <label class="toggle">
+                  <input type="checkbox" name="retain-earnings" onchange="window.handleToggleChange(event)">
+                  <span class="toggle-icon" style="background-color: #00bcd4;"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-content item-input" style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Porcentaje de retención</div>
+              <div class="item-input-wrap" style="position: relative;">
+                <input type="number" name="retention-percent" value="10" min="0" max="100"
+                  style="color: #00bcd4; text-align: right; padding-right: 30px;"
+                  onchange="window.handlePercentChange(event)"
+                  oninput="this.value = Math.max(0, Math.min(100, parseInt(this.value)) || 0)">
+                <span class="input-clear-button" style="right: 0; top: 50%; transform: translateY(-50%);"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <a href="/retencion-info/" class="item-link item-content"
+            style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Información sobre retención</div>
+              <div class="item-after">
+                <i class="icon material-icons" style="color: #00bcd4;">info_outline</i>
+              </div>
+            </div>
+          </a>
+        </li>
+        <!-- Separador -->
+        <li class="list-group-title"
+          style="background-color: transparent; color: #00bcd4; font-weight: bold; margin-top: 20px;">
+          Preferencias
+        </li>
+        <li>
+          <a href="/seguridad/" class="item-link item-content"
+            style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Seguridad</div>
+              <div class="item-after">
+                <i class="icon material-icons" style="color: #00bcd4;">security</i>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <!-- Modo oscuro -->
+        <li>
+          <div class="item-content" style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Modo oscuro</div>
+              <div class="item-after">
+                <label class="toggle">
+                  <input type="checkbox" name="dark-mode" onchange="window.handleDarkModeChange(event)">
+                  <span class="toggle-icon" style="background-color: #00bcd4;"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- Notificaciones -->
+        <li>
+          <div class="item-content" style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Notificaciones</div>
+              <div class="item-after">
+                <label class="toggle">
+                  <input type="checkbox" name="notifications" onchange="window.handleNotificationToggle(event)">
+                  <span class="toggle-icon" style="background-color: #00bcd4;"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- Separador -->
+        <li class="list-group-title"
+          style="background-color: transparent; color: #00bcd4; font-weight: bold; margin-top: 20px;">
+          Información
+        </li>
+
+        <!-- Versión -->
+        <li>
+          <div class="item-content" style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Versión</div>
+              <div class="item-after" style="color: #00bcd4;">0.1.1</div>
+            </div>
+          </div>
+        </li>
+
+        <!-- Soporte -->
+        <li>
+          <a href="/soporte/" class="item-link item-content"
+            style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Soporte</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/licenciaview/" class="item-link item-content"
+            style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Gestión de Licencia</div>
+              <div class="item-after">
+                <i class="icon material-icons" style="color: #00bcd4;">vpn_key</i>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <!-- Acerca de -->
+        <li>
+          <a href="/about/" class="item-link item-content"
+            style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Acerca de</div>
+            </div>
+          </a>
+        </li>
+        <!-- Añadir esto al final de la lista en config.html -->
+        <!-- En config.html, reemplazar la sección de Herramientas de Debug con esto: -->
+        <!--
+        <li class="list-group-title"
+          style="background-color: transparent; color: #00bcd4; font-weight: bold; margin-top: 20px;">
+          Desarrollo
+        </li>
+        <li>
+          <div class="item-content" style="background: white; margin-bottom: 8px; border-radius: 8px;">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Modo desarrollador</div>
+              <div class="item-after">
+                <label class="toggle">
+                  <input type="checkbox" id="dev-mode-toggle" onchange="window.toggleDevMode(event)">
+                  <span class="toggle-icon" style="background-color: #00bcd4;"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        
+          <a href="/developer-tools/" class="item-link item-content"
+            style="background: white; margin-bottom: 8px; border-radius: 8px; display: none;" id="dev-tools-link">
+            <div class="item-inner">
+              <div class="item-title" style="color: #0a192f;">Herramientas de desarrollo</div>
+              <div class="item-after">
+                <i class="icon material-icons" style="color: #00bcd4;">build</i>
+              </div>
+            </div>
+          </a>
+        </li>
+      -->
+
+      </ul>
+    </div>
+  </div>
+</div>
