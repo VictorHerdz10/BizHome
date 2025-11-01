@@ -1,0 +1,45 @@
+{
+  "appId": "com.bizhome.vrhs",
+  "appName": "BizHome",
+  "webDir": "www",
+  "plugins": {
+    "Capacitor": {
+      "android": {
+        "webContentsDebuggingEnabled": true,
+        "backgroundColor": "#121212"
+      }
+    },
+      "CapacitorSQLite": {
+        "iosKeychainPrefix": "BizHome",
+        "androidBiometric": {
+          "biometricAuth": false,
+          "biometricTitle": "Biometric login",
+          "biometricSubTitle": "Log in using biometric authentication"
+        }
+      },
+      "SplashScreen": {
+        "launchAutoHide": true,
+        "backgroundColor": "#ffffffff",
+        "androidScaleType": "CENTER_CROP",
+        "showSpinner": true,
+        "androidSpinnerStyle": "large",
+        "iosSpinnerStyle": "small",
+        "spinnerColor": "#999999",
+        "splashFullScreen": true,
+        "splashImmersive": true
+      },
+      "LocalNotifications": {
+        "smallIcon": "ic_stat_icon_config",
+        "iconColor": "#587bb7",
+        "sound": "beep.mp3"
+      },
+      "Camera": {
+        "ios": {
+          "CameraUsageDescription": "Para agregar imágenes a los productos"
+        },
+        "android": {
+          "CameraUsageDescription": "Para agregar imágenes a los productos"
+        }
+      }
+    }
+  }
