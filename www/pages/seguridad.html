@@ -1,0 +1,154 @@
+<div class="page" data-name="seguridad">
+  <div class="navbar safe-areas safe-areas-top">
+    <div class="navbar-inner">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="if-not-md">Atrás</span>
+        </a>
+      </div>
+      <div class="title">Seguridad</div>
+    </div>
+  </div>
+  
+  <div class="page-content">
+    <div class="block-title">Configuración de Seguridad</div>
+    
+    <div id="security-loading" style="display: none; text-align: center; padding: 20px;">
+      <div class="preloader"></div>
+      <p>Cargando configuración...</p>
+    </div>
+    
+    <div class="card" style="margin: 16px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+      <div class="card-header" style="display: flex; align-items: center; padding: 16px;">
+        <i class="icon material-icons" style="font-size: 24px; color: #2196F3; margin-right: 12px;">security</i>
+        <div style="flex-grow: 1;">
+          <div class="card-title" style="font-weight: 500; font-size: 18px;">Protección de la aplicación</div>
+          <div class="card-subtitle" id="security-status-text" style="font-size: 14px; color: #757575;">Desactivada</div>
+        </div>
+        <label class="toggle toggle-init" style="margin: 0;">
+          <input type="checkbox" id="security-toggle">
+          <span class="toggle-icon" style="background-color: #2196F3;"></span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="block-header" id="security-status">Estado: Cargando...</div>
+    
+    <!-- Sección de Métodos de Seguridad (visible solo cuando está activado) -->
+    <div id="security-methods" style="display: none;">
+      <div class="block-title">Método de Seguridad Actual</div>
+      <div class="block">
+        <p id="current-method" style="font-weight: bold; text-align: center; padding: 10px; background: #f5f5f5; border-radius: 8px;">
+          No configurado
+        </p>
+      </div>
+      
+      <div class="block-title">Configurar Nuevo Método</div>
+      <div class="list">
+        <ul>
+          <li>
+            <a href="#" class="item-link item-content" id="configure-pin-btn">
+              <div class="item-inner">
+                <div class="item-title">PIN Numérico</div>
+                <div class="item-after">4 dígitos</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="item-link item-content" id="configure-password-btn">
+              <div class="item-inner">
+                <div class="item-title">Contraseña</div>
+                <div class="item-after">Mínimo 6 caracteres</div>
+              </div>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Popup de configuración -->
+  <div class="popup" id="security-config-popup">
+    <div class="view">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="title" id="security-popup-title">Configurar Método</div>
+            <div class="right">
+              <a href="#" class="link popup-close"><i class="icon material-icons">close</i></a>
+            </div>
+          </div>
+        </div>
+        <div class="page-content">
+          <div class="block">
+            <form id="security-config-form">
+              <!-- Campos para PIN -->
+              <div id="pin-fields" style="display: none;">
+                <div class="block">
+                  <p>Ingresa un PIN numérico de 4 dígitos:</p>
+                </div>
+                <div class="list">
+                  <ul>
+                    <li class="item-content item-input">
+                      <div class="item-inner">
+                        <div class="item-title item-label">Nuevo PIN</div>
+                        <div class="item-input-wrap">
+                          <input type="password" id="pin-input" placeholder="Ingresa 4 dígitos" maxlength="4" inputmode="numeric" pattern="[0-9]*" class="security-input">
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item-content item-input">
+                      <div class="item-inner">
+                        <div class="item-title item-label">Confirmar PIN</div>
+                        <div class="item-input-wrap">
+                          <input type="password" id="confirm-pin-input" placeholder="Confirma tu PIN" maxlength="4" inputmode="numeric" pattern="[0-9]*" class="security-input">
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <!-- Campos para Contraseña -->
+              <div id="password-fields" style="display: none;">
+                <div class="block">
+                  <p>Ingresa una contraseña segura (mínimo 6 caracteres):</p>
+                </div>
+                <div class="list">
+                  <ul>
+                    <li class="item-content item-input">
+                      <div class="item-inner">
+                        <div class="item-title item-label">Nueva Contraseña</div>
+                        <div class="item-input-wrap">
+                          <input type="password" id="password-input" placeholder="Mínimo 6 caracteres" class="security-input">
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item-content item-input">
+                      <div class="item-inner">
+                        <div class="item-title item-label">Confirmar Contraseña</div>
+                        <div class="item-input-wrap">
+                          <input type="password" id="confirm-password-input" placeholder="Confirma tu contraseña" class="security-input">
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              
+              <div class="block" style="margin-top: 20px;">
+                <button type="button" class="button button-fill button-round color-blue" id="save-security-btn">
+                  <i class="icon material-icons" style="vertical-align: middle; margin-right: 5px;">save</i>
+                  Guardar Configuración
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
