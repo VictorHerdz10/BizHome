@@ -1,0 +1,91 @@
+<!-- license-check.html -->
+<div class="page" data-name="license-check">
+  <div class="navbar safe-areas safe-areas-top">
+    <div class="navbar-inner">
+      <div class="title">Activación de Licencia</div>
+    </div>
+  </div>
+
+  <div class="page-content" style="background-color: #f5f7fa; display: flex; flex-direction: column; justify-content: center; height: 100vh; overflow: hidden;">
+    <!-- Contenedor cuando no hay licencia -->
+    <div id="no-license-container" style="text-align: center; padding: 20px; display: none; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+      <div>
+        <i class="icon material-icons" style="font-size: 72px; color: #ff3b30;">lock</i>
+        <h2 style="color: #ff3b30;">Licencia Requerida</h2>
+        <p>Para usar esta aplicación, necesitas activar una licencia válida</p>
+        
+        <div style="margin: 20px 0;">
+          <div id="qr-license-container" style="margin: 20px auto; max-width: 250px;"></div>
+          <div class="row" style="justify-content: center; margin-top: 15px;">
+            <button onclick="copyQRImage()" class="button button-small color-blue">
+              <i class="icon material-icons">content_copy</i> Copiar QR
+            </button>
+            <button onclick="copyDeviceData()" class="button button-small color-blue">
+              <i class="icon material-icons">content_copy</i> Copiar Datos
+            </button>
+          </div>
+        </div>
+
+        <div class="block" style="margin-top: 10px;margin-bottom: 10px;">
+          <button onclick="app.popup.open('#activate-license-popup')" 
+            class="button button-fill color-blue">
+            <i class="icon material-icons">vpn_key</i> Activar Licencia
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenedor cuando hay licencia pero está verificando -->
+    <div id="verifying-container" style="text-align: center; padding: 20px; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+      <div>
+        <i class="icon material-icons" style="font-size: 72px; color: #00bcd4;">hourglass_full</i>
+        <h2 style="color: #00bcd4;">Verificando Licencia</h2>
+        <p>Por favor espera mientras verificamos tu licencia...</p>
+        <div class="preloader" style="margin: 20px auto;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup para activar licencia -->
+  <div class="popup" id="activate-license-popup">
+    <div class="view">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="title">Activar Licencia</div>
+            <div class="right">
+              <a href="#" class="link popup-close">
+                <i class="icon material-icons">close</i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="page-content">
+          <div class="block">
+            <div class="list no-hairlines">
+              <ul>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Hash de Licencia</div>
+                    <div class="item-input-wrap">
+                      <textarea id="license-hash-input" 
+                        placeholder="Pegue aquí el hash de licencia generado"
+                        style="height: 150px; font-family: monospace;"></textarea>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="block">
+              <button onclick="activateLicense()" 
+                class="button button-fill color-blue" >
+                Activar Licencia
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
