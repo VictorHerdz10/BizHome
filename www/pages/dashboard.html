@@ -1,0 +1,162 @@
+<div class="page" data-name="dashboard">
+  <div class="navbar safe-areas safe-areas-top">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link panel-open" data-panel="left">
+          <i class="icon material-icons">menu</i>
+        </a>
+      </div>
+      <div class="title">Dashboard</div>
+      <div class="right">
+        <a href="/" class="link">
+          <i class="icon material-icons">home</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content" style="background-color: #f5f7fa;">
+    <!-- Resumen rápido -->
+    <div class="block-title">Resumen General</div>
+    <div class="row summary-cards">
+      <div class="col-33">
+        <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <div class="card-header" style="color: var(--f7-color-primary); font-weight: bold; border-bottom: 1px solid #f0f0f0;">Ventas Hoy</div>
+          <div class="card-content card-content-padding" style="text-align: center;">
+            <h3 class="summary-value" style="color: #2ecc71; margin: 8px 0; font-size: 24px;">$0.00</h3>
+            <p class="summary-label" style="color: #7f8c8d; font-size: 14px; margin-top: 4px;"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-33">
+        <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <div class="card-header" style="color: var(--f7-color-primary); font-weight: bold; border-bottom: 1px solid #f0f0f0;">Ganancias Netas</div>
+          <div class="card-content card-content-padding" style="text-align: center;">
+            <h3 class="summary-value" style="color: #3498db; margin: 8px 0; font-size: 24px;">$0.00</h3>
+            <p class="summary-label" style="color: #7f8c8d; font-size: 14px; margin-top: 4px;"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-33">
+        <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <div class="card-header" style="color: var(--f7-color-primary); font-weight: bold; border-bottom: 1px solid #f0f0f0;">Gastos Hoy</div>
+          <div class="card-content card-content-padding" style="text-align: center;">
+            <h3 class="summary-value" style="color: #e74c3c; margin: 8px 0; font-size: 24px;">$0.00</h3>
+            <p class="summary-label" style="color: #7f8c8d; font-size: 14px; margin-top: 4px;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráficos principales -->
+    <div class="row">
+      <div class="col-50">
+        <div class="block-title">Tendencias de Ventas</div>
+        <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <div class="card-content">
+            <div class="chart-container" style="position: relative; height: 250px; padding: 10px;">
+              <canvas id="salesChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-50">
+        <div class="block-title">Control de Gastos</div>
+        <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <div class="card-content">
+            <div class="chart-container" style="position: relative; height: 250px; padding: 10px;">
+              <canvas id="expensesChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rankings -->
+    <div class="row">
+      <div class="col-50">
+        <div class="block-title">Top Días de Ventas</div>
+        <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <div class="card-content card-content-padding" style="padding: 0;">
+            <ul class="ranking-list" id="topSalesDays" style="margin: 0; padding: 0;">
+              <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #f0f0f0;">
+                <span>Cargando...</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-50">
+        <div class="block-title">Top Días de Gastos</div>
+        <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <div class="card-content card-content-padding" style="padding: 0;">
+            <ul class="ranking-list" id="topExpensesDays" style="margin: 0; padding: 0;">
+              <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #f0f0f0;">
+                <span>Cargando...</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Últimas ventas -->
+    <div class="block-title">Últimas Ventas</div>
+    <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <div class="card-content card-content-padding">
+        <div class="data-table">
+          <table style="width: 100%;">
+            <thead>
+              <tr style="background-color: #f8f9fa;">
+                <th style="color: var(--f7-color-primary); padding: 8px 12px; text-align: left;">ID</th>
+                <th style="color: var(--f7-color-primary); padding: 8px 12px; text-align: left;">Fecha</th>
+                <th style="color: var(--f7-color-primary); padding: 8px 12px; text-align: left;">Producto</th>
+                <th style="color: var(--f7-color-primary); padding: 8px 12px; text-align: right;">Total</th>
+              </tr>
+            </thead>
+            <tbody id="recentSalesTable">
+              <tr>
+                <td colspan="4" style="text-align: center; padding: 12px;">Cargando datos...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resumen por categorías -->
+    <div class="block-title">Ventas por Categoría</div>
+    <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <div class="card-content">
+        <div class="chart-container" style="position: relative; height: 300px; padding: 10px;">
+          <canvas id="categoriesChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Productos más vendidos y bajo stock -->
+    <div class="block-title">Productos</div>
+    <div class="row">
+      <div class="col-50">
+        <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <div class="card-header" style="color: var(--f7-color-primary); font-weight: bold; border-bottom: 1px solid #f0f0f0;">Más Vendidos</div>
+          <div class="card-content card-content-padding">
+            <ul class="product-list" id="topProducts" style="margin: 0; padding: 0;">
+              <li style="padding: 8px 0;">Cargando...</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-50">
+        <div class="card" style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <div class="card-header" style="color: var(--f7-color-primary); font-weight: bold; border-bottom: 1px solid #f0f0f0;">Bajo Stock</div>
+          <div class="card-content card-content-padding">
+            <ul class="product-list" id="lowStockProducts" style="margin: 0; padding: 0;">
+              <li style="padding: 8px 0;">Cargando...</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
