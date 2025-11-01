@@ -1,0 +1,41 @@
+<!-- unlock.html -->
+<div class="page" data-name="unlock">
+  <div class="navbar no-hairline no-shadow">
+    <div class="navbar-inner"></div>
+  </div>
+  
+  <div class="page-content" style="display: flex; flex-direction: column; justify-content: center; height: 100vh;">
+    <!-- Preloader para estados de carga -->
+    <div id="unlock-preloader" style="
+  display: none; 
+  margin: 20px auto;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(33, 150, 243, 0.2);
+  border-top-color: #00bcd4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+"></div>
+    
+    <div style="text-align: center; padding: 20px;">
+      <i class="icon material-icons" style="font-size: 48px; color: #00bcd4;">lock</i>
+      <h2>Desbloquear Aplicación</h2>
+      <p id="unlock-instruction">Ingresa tu método de seguridad para continuar</p>
+    </div>
+    
+    <!-- Contenedor dinámico para el método de desbloqueo -->
+    <div id="unlock-method-container" style="max-width: 300px; margin: 0 auto; width: 100%;">
+      <!-- Se llenará dinámicamente según el método -->
+    </div>
+    
+    <!-- Temporizador de bloqueo -->
+    <div id="lockout-timer" style="text-align: center; margin-top: 20px; display: none;">
+      <p style="color: #F44336; font-weight: bold;">Demasiados intentos fallidos</p>
+      <p>Intenta de nuevo en: <span id="countdown" style="font-weight: bold;">01:00</span></p>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="#" id="emergency-exit" style="color: #757575; font-size: 14px;">Salir de la aplicación</a>
+    </div>
+  </div>
+</div>
